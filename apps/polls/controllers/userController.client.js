@@ -4,7 +4,7 @@
 
    var gitUserValue = document.querySelector('#profile-username') || null;
  
-   var apiUrl = appUrl + '/api/user/:id';
+   var apiUrl = appUrl + '/ppp/api/user/:id';
 
    function showHtmlElement (element){
       element.style.display = "block";

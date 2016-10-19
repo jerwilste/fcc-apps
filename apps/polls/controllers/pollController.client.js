@@ -64,7 +64,7 @@ function buildChart(pollNum){
 function deletePollClient(pollNum){
    console.log('in delete poll for '+pollNum);
    var p = pollNum;
-   var apiUrl = appUrl + '/api/polls/delete';
+   var apiUrl = appUrl + '/ppp/api/polls/delete';
    
    
    var postedPoll = $.post(apiUrl, {
@@ -74,7 +74,7 @@ function deletePollClient(pollNum){
       console.log('failed');
    })
    postedPoll.always(function(data) {
-      window.location.reload();
+      window.location.href = appUrl + "/ppp";
 
    });
 }
@@ -83,7 +83,7 @@ function newPollClient(){
    //q = $(q).text();//.replace('<script>','').replace('</script>','');
    var a = ($("#textarea").val());
    //a = $(a).text();//.replace('<script>','').replace('</script>','');
-   var apiUrl = appUrl + '/api/polls/add';
+   var apiUrl = appUrl + '/ppp/api/polls/add';
    
    
    var postedPoll = $.post(apiUrl, {
@@ -123,7 +123,7 @@ function addVoteClient(){
    console.log(q);
    console.log(v);
    
-   var apiUrl = appUrl + '/api/polls/addVote/'+q+'?vote='+v; 
+   var apiUrl = appUrl + '/ppp/api/polls/addVote/'+q+'?vote='+v; 
        
    ajaxFunctions.ready(ajaxFunctions.ajaxRequest('POST', apiUrl, function(data) {
          $("#selectVote").html("<option disabled selected value> you already voted!! </option>");
@@ -145,7 +145,7 @@ function addVoteClient(){
 
 function getPollsClient(callback) {
   
-   var apiUrl = appUrl + '/api/polls/all';
+   var apiUrl = appUrl + '/ppp/api/polls/all';
 
    ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, function(data) {
       callback(JSON.parse(data));
@@ -154,7 +154,7 @@ function getPollsClient(callback) {
 }
 function getSpecificPollClient(pNum, callback) {
   
-   var apiUrl = appUrl + '/api/polls/'+pNum;
+   var apiUrl = appUrl + '/ppp/api/polls/'+pNum;
 
    ajaxFunctions.ready(ajaxFunctions.ajaxRequest('GET', apiUrl, function(data) {
       callback(JSON.parse(data));
@@ -191,8 +191,8 @@ function openPoll(poll,user){
       
       buildChart(p.number);
       
-      $("#share").attr("data-href","https://pollspollspolls-iloanzi.c9users.io/poll?number="+p.number);
-      $("#share").attr("href","https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpollspollspolls-iloanzi.c9users.io%2Fpoll%3Fnumber%3D"+p.number+"&amp;src=sdkpreparse");
+      $("#share").attr("data-href",appUrl + "/ppp/poll?number="+p.number);
+      $("#share").attr("href","https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Ffcc-apps.herokuapp.com//ppp/poll%2Fpoll%3Fnumber%3D"+p.number+"&amp;src=sdkpreparse");
 
    });
    //$("#votePoll").prop("action", "/api/polls/addVote/"+(poll[2]));
@@ -202,19 +202,19 @@ function showPollList(){
    getPollsClient(function(d){
       pollData = d;
       if (lastList === "user"){
-         window.location.href = "https://pollspollspolls-iloanzi.c9users.io?list=user";
+         window.location.href = appUrl + "/ppp?list=user";
       }
       else {
-         window.location.href = "https://pollspollspolls-iloanzi.c9users.io";
+         window.location.href = appUrl + "/ppp";
       }
    });
    
 }
 function openPollPage(num){
-   window.location.href = "https://pollspollspolls-iloanzi.c9users.io/poll?number="+num;
+   window.location.href = appUrl + "/ppp/poll?number="+num;
 }
 function headHome(){
-   window.location.href = "https://pollspollspolls-iloanzi.c9users.io/";
+   window.location.href = appUrl + '/ppp';
 }
 function openCreatePoll(){
    $("#newPoll").removeClass("hide");

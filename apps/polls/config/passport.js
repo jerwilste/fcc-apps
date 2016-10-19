@@ -18,7 +18,7 @@ module.exports = function (passport) {
 	passport.use(new GitHubStrategy({
 		clientID: configAuth.githubAuth.clientID,
 		clientSecret: configAuth.githubAuth.clientSecret,
-		callbackURL: configAuth.githubAuth.callbackURL
+		callbackURL: configAuth.githubAuth.Heroku_callbackURL
 	},
 	function (token, refreshToken, profile, done) {
 		process.nextTick(function () {
