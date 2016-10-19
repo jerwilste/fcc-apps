@@ -17,7 +17,7 @@ app.use(bodyparser.urlencoded({     // to support URL-encoded bodies
 require('dotenv').load();
 require('./apps/polls/config/passport')(passportPolls);
 
-mongoose.connect(process.env.MONGO_URI);
+mongoose.connect(process.env.MONGOLAB_URI);
 
 app.use('/polls', express.static(process.cwd() + '/apps/polls/'));
 app.use('/common', express.static(process.cwd() + '/apps/common/'));
