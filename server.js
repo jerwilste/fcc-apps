@@ -2,9 +2,9 @@
 
 var express = require('express');
 var routes = require('./apps/routes/index.js');
-//var mongoose = require('mongoose');
-//var passportPolls = require('passport');
-//var session = require('express-session');
+var mongoose = require('mongoose');
+var passportPolls = require('passport');
+var session = require('express-session');
 
 var app = express();
 
@@ -15,37 +15,40 @@ app.use(bodyparser.urlencoded({     // to support URL-encoded bodies
 })); 
 
 require('dotenv').load();
-//require('./apps/polls/config/passport')(passportPolls);
+require('./apps/polls/config/passport')(passportPolls);
 
-/*mongoose.connect('mongodb://heroku_f082b2cm:u5p2jn1tb2mj8au9mb45glf6fo@ds031978.mlab.com:31978/heroku_f082b2', function(err){
-/    if (err) {
-    throw new Error('Database failed to connect!');
+var uristring =
+    process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL ||
+    'mongodb://localhost/HelloMongoose';
+
+// Makes connection asynchronously.  Mongoose will queue up database
+// operations and release them when the connection is complete.
+mongoose.connect(uristring, function (err, res) {
+  if (err) {
+  console.log ('ERROR connecting to: ' + uristring + '. ' + err);
   } else {
-    console.log('Successfully connected to MongoDB on port 27017.');
+  console.log ('Succeeded connected to: ' + uristring);
   }
-});*/
-
-
+});
 
 app.use('/polls', express.static(process.cwd() + '/apps/polls/'));
 app.use('/common', express.static(process.cwd() + '/apps/common/'));
 
-//var UsersPPP = require('./apps/polls/models/users.js');
+var UsersPPP = require('./apps/polls/models/users.js');
 
-/*app.use(session({
+app.use(session({
 	secret: 'secretFCC',
 	resave: false,
 	saveUninitialized: true
 }));
 
 app.use(passportPolls.initialize());
-app.use(passportPolls.session());*/
+app.use(passportPolls.session());
 
 app.set('view engine', 'ejs');
 
-//routes(app, passportPolls);
-
-routes(app);
+routes(app, passportPolls);
 
 var port = process.env.PORT || 8080;
 app.listen(port,  function () {
