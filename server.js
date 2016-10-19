@@ -17,7 +17,15 @@ app.use(bodyparser.urlencoded({     // to support URL-encoded bodies
 require('dotenv').load();
 require('./apps/polls/config/passport')(passportPolls);
 
-mongoose.connect(process.env.MONGOLAB_URI);
+mongoose.connect(process.env.MONGOLAB_URI, function(err){
+    if (err) {
+    throw new Error('Database failed to connect!');
+  } else {
+    console.log('Successfully connected to MongoDB on port 27017.');
+  }
+});
+
+
 
 app.use('/polls', express.static(process.cwd() + '/apps/polls/'));
 app.use('/common', express.static(process.cwd() + '/apps/common/'));
