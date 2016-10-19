@@ -15,15 +15,15 @@ app.use(bodyparser.urlencoded({     // to support URL-encoded bodies
 })); 
 
 require('dotenv').load();
-require('./apps/polls/config/passport')(passportPolls);
+//require('./apps/polls/config/passport')(passportPolls);
 
-mongoose.connect('mongodb://heroku_f082b2cm:u5p2jn1tb2mj8au9mb45glf6fo@ds031978.mlab.com:31978/heroku_f082b2', function(err){
-    if (err) {
+/*mongoose.connect('mongodb://heroku_f082b2cm:u5p2jn1tb2mj8au9mb45glf6fo@ds031978.mlab.com:31978/heroku_f082b2', function(err){
+/    if (err) {
     throw new Error('Database failed to connect!');
   } else {
     console.log('Successfully connected to MongoDB on port 27017.');
   }
-});
+});*/
 
 
 
@@ -32,14 +32,14 @@ app.use('/common', express.static(process.cwd() + '/apps/common/'));
 
 var UsersPPP = require('./apps/polls/models/users.js');
 
-app.use(session({
+/*app.use(session({
 	secret: 'secretFCC',
 	resave: false,
 	saveUninitialized: true
 }));
 
 app.use(passportPolls.initialize());
-app.use(passportPolls.session());
+app.use(passportPolls.session());*/
 
 app.set('view engine', 'ejs');
 
