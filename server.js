@@ -17,7 +17,7 @@ app.use(bodyparser.urlencoded({     // to support URL-encoded bodies
 require('dotenv').load();
 require('./apps/polls/config/passport')(passportPolls);
 
-mongoose.connect(process.env.MONGOLAB_URI, function(err){
+mongoose.connect('mongodb://heroku_f082b2cm:u5p2jn1tb2mj8au9mb45glf6fo@ds031978.mlab.com:31978/heroku_f082b2', function(err){
     if (err) {
     throw new Error('Database failed to connect!');
   } else {
