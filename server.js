@@ -2,9 +2,9 @@
 
 var express = require('express');
 var routes = require('./apps/routes/index.js');
-var mongoose = require('mongoose');
-var passportPolls = require('passport');
-var session = require('express-session');
+//var mongoose = require('mongoose');
+//var passportPolls = require('passport');
+//var session = require('express-session');
 
 var app = express();
 
@@ -30,7 +30,7 @@ require('dotenv').load();
 app.use('/polls', express.static(process.cwd() + '/apps/polls/'));
 app.use('/common', express.static(process.cwd() + '/apps/common/'));
 
-var UsersPPP = require('./apps/polls/models/users.js');
+//var UsersPPP = require('./apps/polls/models/users.js');
 
 /*app.use(session({
 	secret: 'secretFCC',
