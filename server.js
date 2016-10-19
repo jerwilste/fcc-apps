@@ -18,7 +18,7 @@ require('dotenv').load();
 require('./apps/polls/config/passport')(passportPolls);
 
 var uristring =
-    process.env.MONGOLAB_URI ||
+    process.env.MONGODB_URI ||
     process.env.MONGOHQ_URL ||
     'mongodb://localhost/HelloMongoose';
 
